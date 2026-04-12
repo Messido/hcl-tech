@@ -45,7 +45,6 @@ export default function SignUpPage() {
         return;
       }
 
-      // Auto sign-in after successful registration
       const result = await signIn("credentials", {
         email,
         password,
@@ -67,98 +66,109 @@ export default function SignUpPage() {
 
   return (
     <div className="auth-page">
-      <div className="auth-card">
-        <div className="auth-brand">
-          <div className="auth-logo">A</div>
-          <h1>Create account</h1>
-          <p>Get started with your free account</p>
+      <div className="auth-side">
+        <div className="auth-side-dots" />
+        <div className="auth-side-content">
+          <p className="auth-side-quote">
+            &ldquo;Start simple, stay secure, scale when ready.&rdquo;
+          </p>
+          <p className="auth-side-attr">Build with confidence</p>
         </div>
+      </div>
 
-        {error && (
-          <div className="message message-error" id="signup-error">
-            {error}
-          </div>
-        )}
-
-        <form onSubmit={handleSubmit} id="signup-form">
-          <div className="form-group">
-            <label htmlFor="name" className="form-label">
-              Full name
-            </label>
-            <input
-              id="name"
-              type="text"
-              className="form-input"
-              placeholder="John Doe"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              required
-              autoComplete="name"
-            />
+      <div className="auth-main">
+        <div className="auth-card">
+          <div className="auth-brand">
+            <h1>Create account</h1>
+            <p>Get started in under a minute</p>
           </div>
 
-          <div className="form-group">
-            <label htmlFor="email" className="form-label">
-              Email address
-            </label>
-            <input
-              id="email"
-              type="email"
-              className="form-input"
-              placeholder="you@example.com"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              required
-              autoComplete="email"
-            />
+          {error && (
+            <div className="message message-error" id="signup-error">
+              {error}
+            </div>
+          )}
+
+          <form onSubmit={handleSubmit} id="signup-form">
+            <div className="form-group">
+              <label htmlFor="name" className="form-label">
+                Full name
+              </label>
+              <input
+                id="name"
+                type="text"
+                className="form-input"
+                placeholder="Jane Doe"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+                autoComplete="name"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="email" className="form-label">
+                Email
+              </label>
+              <input
+                id="email"
+                type="email"
+                className="form-input"
+                placeholder="you@example.com"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+                autoComplete="email"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="password" className="form-label">
+                Password
+              </label>
+              <input
+                id="password"
+                type="password"
+                className="form-input"
+                placeholder="Min. 6 characters"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+                minLength={6}
+                autoComplete="new-password"
+              />
+            </div>
+
+            <div className="form-group">
+              <label htmlFor="confirmPassword" className="form-label">
+                Confirm password
+              </label>
+              <input
+                id="confirmPassword"
+                type="password"
+                className="form-input"
+                placeholder="••••••••"
+                value={confirmPassword}
+                onChange={(e) => setConfirmPassword(e.target.value)}
+                required
+                autoComplete="new-password"
+              />
+            </div>
+
+            <button
+              type="submit"
+              className="btn btn-primary"
+              disabled={loading}
+              id="signup-button"
+            >
+              {loading ? <span className="spinner" /> : "Create account"}
+            </button>
+          </form>
+
+          <div className="auth-footer">
+            Already have an account?{" "}
+            <Link href="/signin">Sign in</Link>
           </div>
-
-          <div className="form-group">
-            <label htmlFor="password" className="form-label">
-              Password
-            </label>
-            <input
-              id="password"
-              type="password"
-              className="form-input"
-              placeholder="Min. 6 characters"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              required
-              minLength={6}
-              autoComplete="new-password"
-            />
-          </div>
-
-          <div className="form-group">
-            <label htmlFor="confirmPassword" className="form-label">
-              Confirm password
-            </label>
-            <input
-              id="confirmPassword"
-              type="password"
-              className="form-input"
-              placeholder="••••••••"
-              value={confirmPassword}
-              onChange={(e) => setConfirmPassword(e.target.value)}
-              required
-              autoComplete="new-password"
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="btn btn-primary"
-            disabled={loading}
-            id="signup-button"
-          >
-            {loading ? <span className="spinner" /> : "Create account"}
-          </button>
-        </form>
-
-        <div className="auth-footer">
-          Already have an account?{" "}
-          <Link href="/signin">Sign in</Link>
         </div>
       </div>
     </div>
