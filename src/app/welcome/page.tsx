@@ -28,8 +28,8 @@ export default async function WelcomePage() {
     <div className="welcome-page">
       <nav className="welcome-nav">
         <div className="welcome-nav-brand">
-          <div className="welcome-nav-logo">A</div>
-          <span>AuthApp</span>
+          <div className="welcome-nav-logo">AM</div>
+          <span>Asset Management</span>
         </div>
         <div className="welcome-nav-user">
           <div className="welcome-user-info">
