@@ -1,0 +1,87 @@
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model User {
+  id        String   @id @default(uuid())
+  name      String
+  email     String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  assets    Asset[]
+}
+
+model Asset {
+  id                       String     @id @default(uuid())
+  requestNo                String     @unique
+  status                   String     @default("Requestor Saved")
+
+  // Asset Info
+  salesType                String?
+  companyCode              String?
+  assetCategory            String?
+  categoryOfUnits          String?
+  entityName               String?
+  assetLocation            String?
+  grossValue               String?
+  wdv                      String?
+  costCenter               String?
+  salesValue               String?
+
+  // Consigner
+  consignerName            String?
+  consignerAddress         String?
+  consignerPinCode         String?
+  consignerLocation        String?
+  plantCode                String?
+  consignerGSTIN           String?
+
+  // Consignee
+  consigneeName            String?
+  consigneeAddress         String?
+  consigneePinCode         String?
+  consigneeLocation        String?
+  consigneeGSTIN           String?
+  consigneeCategoryOfUnits String?
+  shipToName               String?
+  shipToAddress            String?
+  shipToGSTIN              String?
+  type                     String?
+  documentType             String?
+  taxType                  String?
+  consigneePlantCode       String?
+  consigneeCostCenter      String?
+
+  // Comments & Documents
+  comments                 String?
+  farDocuments             String?
+  otherDocuments           String?
+  sourcingApproval         String?
+  dc                       String?
+  paymentConfirmation      String?
+
+  // Relations
+  lineItems                LineItem[]
+  createdBy                User       @relation(fields: [userId], references: [id])
+  userId                   String
+  createdAt                DateTime   @default(now())
+  updatedAt                DateTime   @updatedAt
+}
+
+model LineItem {
+  id          String  @id @default(uuid())
+  sNo         Int
+  description String?
+  uqc         String?
+  quantity    String?
+  rate        String?
+  amount      String?
+  hsnCode     String?
+  asset       Asset   @relation(fields: [assetId], references: [id], onDelete: Cascade)
+  assetId     String
+}

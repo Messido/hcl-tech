@@ -19,7 +19,7 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    createUser(name, email, password);
+    await createUser(name, email, password);
 
     return NextResponse.json(
       { message: "Account created successfully" },
